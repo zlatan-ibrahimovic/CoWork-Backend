@@ -28,7 +28,7 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votr
 2. **Accédez au répertoire du projet :**
 
     ```bash
-    cd CoWork-Backend
+    cd Nom du dossier racine
     ```
 
 3. **Lancez l'application :** Si vous utilisez le Maven Wrapper inclus dans le projet, exécutez :
@@ -72,7 +72,7 @@ Voici quelques commandes utiles pour travailler avec le projet Maven :
 * **Créer un fichier exécutable .jar :**
 
     ```bash
-    server.port=8081 
+    mvn package
     ```
 Le fichier .jar généré sera disponible dans le dossier target/.
 
@@ -98,8 +98,8 @@ Voici un aperçu des dossiers et fichiers principaux du projet Spring Boot :
 
 Ajouter ou modifier cette ligne dans application.properties:
 
-    ```java
-    server.port=8081 
+    ```bash
+    server.port=8081
     ```
 L'application utilisera désormais le port '8081' au lieu de '8080'.
 
