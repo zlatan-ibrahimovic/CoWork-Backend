@@ -72,7 +72,7 @@ Voici quelques commandes utiles pour travailler avec le projet Maven :
 * **Créer un fichier exécutable .jar :**
 
     ```bash
-    mvn package
+    server.port=8081 
     ```
 Le fichier .jar généré sera disponible dans le dossier target/.
 
@@ -98,8 +98,8 @@ Voici un aperçu des dossiers et fichiers principaux du projet Spring Boot :
 
 Ajouter ou modifier cette ligne dans application.properties:
 
-    ```bash
-    server.port=8081
+    ```java
+    server.port=8081 
     ```
 L'application utilisera désormais le port '8081' au lieu de '8080'.
 
