@@ -69,34 +69,34 @@ Voici quelques commandes utiles pour travailler avec le projet Maven :
     ```bash
     mvn clean
     ```
-* **Créer un fichier exécutable .<<jar>> :**
+* **Créer un fichier exécutable .jar :**
 
     ```bash
     mvn package
     ```
-Le fichier .<<jar>> généré sera disponible dans le dossier <<target/>>.
+Le fichier .jar généré sera disponible dans le dossier target/.
 
 # Structure du projet
 
 Voici un aperçu des dossiers et fichiers principaux du projet Spring Boot :
 
-* <<src/main/java>>: Contient le code source principal de l'application.
-* <<src/main/ressources>>: Contient les fichiers de configuration et les ressources (comme les fichiers <<application.properties>>).
-* <<pom.xml>>: Fichier de configuration Maven où sont définies les dépendances et les plugins.
-* <<target/>>: Dossier généré automatiquement après la compilation, contenant les fichiers .<<class>> et le .<<jar>>.
-* <<mvnw>> et <<mvnw.cmd>> : Scripts Maven Wrapper pour exécuter Maven sans installation globale.
+* src/main/java: Contient le code source principal de l'application.
+* src/main/ressources: Contient les fichiers de configuration et les ressources (comme les fichiers application.properties).
+* pom.xml>>: Fichier de configuration Maven où sont définies les dépendances et les plugins.
+* target/: Dossier généré automatiquement après la compilation, contenant les fichiers .class et le .jar.
+* mvnw et mvnw.cmd : Scripts Maven Wrapper pour exécuter Maven sans installation globale.
 
 # FAQ
 
-## Que faire si <<mvn spring-boot:run>> ne fonctionne pas ?
+## Que faire si mvn spring-boot:run ne fonctionne pas ?
 
-1. Assurez-vous que Java est bien installé et configuré (vérifiez avec <<java -version>>).
-2. Si Maven n'est pas reconnu, utilisez le Maven Wrapper inclus (.<</mvnw>> ou <<mvnw.cmd>>).
+1. Assurez-vous que Java est bien installé et configuré (vérifiez avec java -version).
+2. Si Maven n'est pas reconnu, utilisez le Maven Wrapper inclus (./mvnw ou mvnw.cmd).
 3. Consultez les erreurs affichées dans la console et corrigez-les selon les instructions.
 
 ## Comment changer le port par défaut ?
 
-Ajouter ou modifier cette ligne dans <<application.properties>>:
+Ajouter ou modifier cette ligne dans application.properties:
 
     ```bash
     server.port=8081
@@ -107,10 +107,10 @@ L'application utilisera désormais le port '8081' au lieu de '8080'.
 
 Voici quelques ressources pour approfondir vos connaissances sur Spring Boot et Maven :
 
-[Spring Boot](https://spring.io/projects/spring-boot)
-[Spring Initializr](https://start.spring.io/): Générateur de projets Spring Boot.
-[Maven Central Repository](https://mvnrepository.com/): Trouver des dépendances Maven.
-[Spring Boot Guide pour Débutants](https://spring.io/guides)
+* [Spring Boot](https://spring.io/projects/spring-boot)
+* [Spring Initializr](https://start.spring.io/): Générateur de projets Spring Boot.
+* [Maven Central Repository](https://mvnrepository.com/): Trouver des dépendances Maven.
+* [Spring Boot Guide pour Débutants](https://spring.io/guides)
 
 # Auteur
 
