@@ -82,7 +82,7 @@ Voici un aperçu des dossiers et fichiers principaux du projet Spring Boot :
 
 * src/main/java: Contient le code source principal de l'application.
 * src/main/ressources: Contient les fichiers de configuration et les ressources (comme les fichiers application.properties).
-* pom.xml>>: Fichier de configuration Maven où sont définies les dépendances et les plugins.
+* pom.xml: Fichier de configuration Maven où sont définies les dépendances et les plugins.
 * target/: Dossier généré automatiquement après la compilation, contenant les fichiers .class et le .jar.
 * mvnw et mvnw.cmd : Scripts Maven Wrapper pour exécuter Maven sans installation globale.
 
