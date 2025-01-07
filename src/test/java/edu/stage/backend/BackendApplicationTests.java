@@ -1,4 +1,4 @@
-package edu.stage.cowork.backend;
+package edu.stage.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
