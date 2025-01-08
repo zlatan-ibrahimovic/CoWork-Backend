@@ -1,6 +1,6 @@
-# CoWork Backend
+# CoWork-Backend
 
-Bienvenue sur **CoWork Backend**, une application Spring Boot conçue pour gérer la logique et les données de la plateforme de coworking.
+Bienvenue sur le **Backend** de mon application **CoWork**, une application Spring Boot conçue pour gérer la logique et les données d'un Gestionnaire de Tâches Collaboratif.
 
 ---
 
