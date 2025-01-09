@@ -1,6 +1,6 @@
-# CoWork Backend
+# CoWork-Backend
 
-Bienvenue sur **CoWork Backend**, une application Spring Boot conçue pour gérer la logique et les données de la plateforme de coworking.
+Bienvenue sur le **Backend** de mon application **CoWork**, une application Spring Boot conçue pour gérer la logique et les données d'un Gestionnaire de Tâches Collaboratif.
 
 ---
 
@@ -98,9 +98,9 @@ Voici un aperçu des dossiers et fichiers principaux du projet Spring Boot :
 
 Ajouter ou modifier cette ligne dans application.properties:
 
-    ```bash
-    server.port=8081
-    ```
+```bash
+server.port=8081
+```
 L'application utilisera désormais le port '8081' au lieu de '8080'.
 
 # Ressources Utiles
