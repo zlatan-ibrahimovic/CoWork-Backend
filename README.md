@@ -98,9 +98,9 @@ Voici un aperçu des dossiers et fichiers principaux du projet Spring Boot :
 
 Ajouter ou modifier cette ligne dans application.properties:
 
-    ```bash
-    server.port=8081
-    ```
+```bash
+server.port=8081
+```
 L'application utilisera désormais le port '8081' au lieu de '8080'.
 
 # Ressources Utiles
