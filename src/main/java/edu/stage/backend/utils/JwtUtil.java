@@ -49,7 +49,6 @@ public class JwtUtil {
         }
     }
 
-
     private Key getSigningKey() {
         byte[] keyBytes = Base64.getDecoder().decode(secret);
         if (keyBytes.length < 32) {
