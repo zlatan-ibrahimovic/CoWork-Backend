@@ -45,6 +45,7 @@ public class JwtUtil {
                     .parseClaimsJws(token);
             return true;
         } catch (JwtException e) {
+            System.out.println("Erreur JWT : " + e.getMessage());
             return false;
         }
     }

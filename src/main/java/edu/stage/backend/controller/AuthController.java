@@ -3,24 +3,20 @@ package edu.stage.backend.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import edu.stage.backend.User;
 import edu.stage.backend.repository.UserRepository;
 import edu.stage.backend.utils.JwtUtil;
 
 import java.util.Optional;
+import java.util.Map;
 
 
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-    
+
     @Autowired
     private UserRepository userRepository;
 
@@ -28,18 +24,18 @@ public class AuthController {
     private JwtUtil jwtUtil;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User user) {
+    public ResponseEntity<Map<String, String>> login(@RequestBody User user) {
         System.out.println("Requête reçue avec : Email = " + user.getEmail() + ", Password = " + user.getPassword());
         
         Optional<User> existingUserOpt = userRepository.findByEmail(user.getEmail());
         if (existingUserOpt.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Identifiants invalides (email non trouvé)");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Identifiants invalides (email non trouvé)"));
         }
 
         User existingUser = existingUserOpt.get();
 
         if (existingUser == null || !existingUser.getPassword().equals(user.getPassword())) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Identifiants invalides");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Identifiants invalides"));
         }
         
        
@@ -47,7 +43,7 @@ public class AuthController {
 
         System.out.println("Token généré pour l'utilisateur : " + token);
 
-        return ResponseEntity.ok("Token : " + token );
+        return ResponseEntity.ok(Map.of("token : ", token ));
     }
 
     @GetMapping("/getUserByToken")
@@ -70,5 +66,22 @@ public class AuthController {
 
         return ResponseEntity.ok(userOpt.get());
     }
+
+    @PostMapping("/validate-token")
+    public ResponseEntity<String> validateToken(@RequestBody String token) {
+        try {
+            boolean isValid = jwtUtil.validateToken(token);
+
+            if (isValid) {
+                return ResponseEntity.ok("Le token est valide.");
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Le token est invalide.");
+            }
+        } catch (Exception e) {
+            System.out.println("Erreur lors de la validation du token : " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur lors de la validation du token.");
+        }
+    }
+
 }
 
