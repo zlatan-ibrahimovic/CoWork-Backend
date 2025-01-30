@@ -43,7 +43,7 @@ public class AuthController {
 
         System.out.println("Token généré pour l'utilisateur : " + token);
 
-        return ResponseEntity.ok(Map.of("token : ", token ));
+        return ResponseEntity.ok(Map.of("token", token));
     }
 
     @GetMapping("/getUserByToken")
