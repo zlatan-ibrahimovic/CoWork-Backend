@@ -24,9 +24,8 @@ public class UserController {
         System.out.println("Email reçu : " + user.getEmail());
 
         
-        if (userRepository.findByEmail(user.getEmail()) != null) {
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             System.out.println("Conflit : l'utilisateur avec l'email existe déjà.");
-
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
 
