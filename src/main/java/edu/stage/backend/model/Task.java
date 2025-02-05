@@ -1,7 +1,9 @@
 package edu.stage.backend.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import jakarta.validation.constraints.Size; 
 
 @Entity
 @Table(name = "tasks")
@@ -13,10 +15,12 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Le titre est obligatoire")
+    @Size(max = 100, message = "Le titre ne doit pas dépasser 100 caractères")
     @Column(nullable = false)
     private String title;
 
-    @Column(length = 500)
+    @Size(max = 500, message = "La description ne doit pas dépasser 500 caractères")
     private String description;
 
     @Enumerated(EnumType.STRING)

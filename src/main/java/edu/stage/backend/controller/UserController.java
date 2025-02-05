@@ -1,6 +1,6 @@
 package edu.stage.backend.controller;
 
-import edu.stage.backend.User;
+import edu.stage.backend.model.User;
 import edu.stage.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

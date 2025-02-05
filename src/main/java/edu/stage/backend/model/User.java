@@ -1,4 +1,4 @@
-package edu.stage.backend;
+package edu.stage.backend.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

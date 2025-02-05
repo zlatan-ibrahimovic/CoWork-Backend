@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import edu.stage.backend.User;
+import edu.stage.backend.model.User;
 import edu.stage.backend.repository.UserRepository;
 import edu.stage.backend.utils.JwtUtil;
 
