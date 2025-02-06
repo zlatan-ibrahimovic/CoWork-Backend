@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import java.util.List;
 
 @RestController
@@ -21,11 +23,13 @@ public class TaskController {
     private TaskService taskService;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('USER')")
     public List<Task> getAllTasks() {
         return taskService.getAllTasks();
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<Task> createTask(@Valid @RequestBody Task task) {
     Task savedTask = taskService.createTask(task);
     return ResponseEntity.status(HttpStatus.CREATED).body(savedTask);
@@ -37,6 +41,7 @@ public class TaskController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<Task> getTaskById(@PathVariable Long id) {
         return taskService.getTaskById(id)
             .map(task -> ResponseEntity.ok().body(task))
@@ -44,6 +49,7 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<Task> updateTask(@PathVariable Long id, @Valid @RequestBody Task updatedTask) {
         return taskService.updateTask(id, updatedTask)
             .map(ResponseEntity::ok)
@@ -51,6 +57,7 @@ public class TaskController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('USER')")
     public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
         return taskService.deleteTask(id)
             ? ResponseEntity.noContent().build()
