@@ -37,7 +37,7 @@ public class TaskController {
     
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<String> handleValidationException(MethodArgumentNotValidException ex) {
-        return ResponseEntity.badRequest().body("Erreur de validation : " + ex.getBindingResult().getFieldError().getDefaultMessage());
+        return ResponseEntity.badRequest().body("Erreur de validation : " +  ex.getBindingResult().getFieldError().getDefaultMessage());
     }
 
     @GetMapping("/{id}")
