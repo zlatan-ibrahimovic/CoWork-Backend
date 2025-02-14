@@ -38,7 +38,7 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Identifiants invalides"));
         }
 
-        String token = jwtUtil.generateToken(user.getEmail());
+        String token = jwtUtil.generateToken(existingUser.getEmail(), existingUser.getRole());
 
         System.out.println("Token généré pour l'utilisateur : " + token);
 

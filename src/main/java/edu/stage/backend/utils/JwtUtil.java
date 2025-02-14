@@ -14,6 +14,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import edu.stage.backend.model.Role;
+
 
 @Component
 public class JwtUtil {
@@ -33,9 +35,10 @@ public class JwtUtil {
         }
     }
 
-    public String generateToken(String email) {
+    public String generateToken(String email, Role role) {
         return Jwts.builder()
                 .setSubject(email)
+                .claim("role", role.name())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
@@ -51,6 +54,23 @@ public class JwtUtil {
                 .getBody()
                 .getSubject();
     }
+
+    public Role extractRole(String token) {
+        try {
+            String roleName = Jwts.parserBuilder()
+                    .setSigningKey(getSigningKey())
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody()
+                    .get("role", String.class);
+    
+            return Role.valueOf(roleName);
+        } catch (Exception e) {
+            System.out.println("❌ Erreur lors de l'extraction du rôle : " + e.getMessage());
+            return null;
+        }
+    }
+    
 
     public boolean validateToken(String token, String userEmail) {
         if (token == null || token.isEmpty()) {

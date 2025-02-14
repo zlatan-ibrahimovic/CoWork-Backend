@@ -12,6 +12,7 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
 
@@ -23,25 +24,32 @@ public class TaskController {
     private TaskService taskService;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasRole('USER')")
     public List<Task> getAllTasks() {
         return taskService.getAllTasks();
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Task> createTask(@Valid @RequestBody Task task) {
+    System.out.println("🔒 Vérification des droits : " + SecurityContextHolder.getContext().getAuthentication().getAuthorities());
     Task savedTask = taskService.createTask(task);
     return ResponseEntity.status(HttpStatus.CREATED).body(savedTask);
     }
     
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<String> handleValidationException(MethodArgumentNotValidException ex) {
-        return ResponseEntity.badRequest().body("Erreur de validation : " +  ex.getBindingResult().getFieldError().getDefaultMessage());
+        String errorMessage = ex.getBindingResult().getFieldErrors().stream()
+                .findFirst()
+                .map(fieldError -> fieldError.getDefaultMessage())
+                .orElse("Erreur de validation inconnue");
+
+        return ResponseEntity.badRequest().body("Erreur de validation : " + errorMessage);
     }
 
+
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Task> getTaskById(@PathVariable Long id) {
         return taskService.getTaskById(id)
             .map(task -> ResponseEntity.ok().body(task))
@@ -49,7 +57,7 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Task> updateTask(@PathVariable Long id, @Valid @RequestBody Task updatedTask) {
         return taskService.updateTask(id, updatedTask)
             .map(ResponseEntity::ok)
@@ -57,7 +65,7 @@ public class TaskController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
         return taskService.deleteTask(id)
             ? ResponseEntity.noContent().build()

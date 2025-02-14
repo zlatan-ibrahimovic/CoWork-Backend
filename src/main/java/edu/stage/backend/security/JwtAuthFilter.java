@@ -7,12 +7,14 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.List;
 
 public class JwtAuthFilter extends OncePerRequestFilter {
 
@@ -52,16 +54,27 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
     
         String email = jwtUtil.extractEmail(token);
+        String role = jwtUtil.extractRole(token).name();
+        
         System.out.println("📩 Email extrait du token : " + email);
+        System.out.println("🎭 Rôle extrait du token : " + role);
     
-        if (email != null && jwtUtil.validateToken(token, email)) {
+        if (email != null && role != null && jwtUtil.validateToken(token, email)) {
             System.out.println("✅ Token valide, authentification en cours...");
     
-            User user = new User(email, "", Collections.emptyList());
+            // 🔥 Création d'une liste d'autorités avec le rôle extrait
+            List<SimpleGrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role));
+            System.out.println("🔑 Autorités attribuées : " + authorities);
+
+            // 🔥 Associer l'utilisateur et ses autorités
+            User user = new User(email, "", authorities);
             UsernamePasswordAuthenticationToken auth =
                     new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(auth);
+
+            System.out.println("🎭 [SPRING SECURITY] Autorités appliquées : " + SecurityContextHolder.getContext().getAuthentication().getAuthorities());
+
         } else {
             System.out.println("❌ Token invalide ou expiré !");
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token invalide ou expiré.");
@@ -70,5 +83,4 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     
         filterChain.doFilter(request, response);
     }
-    
 }
