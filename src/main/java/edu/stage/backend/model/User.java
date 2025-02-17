@@ -1,6 +1,9 @@
-package edu.stage.backend;
+package edu.stage.backend.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,6 +27,10 @@ public class User {
     @NotBlank(message = "Le mot de passe ne peut pas être vide")
     @Size(min = 6, message = "Le mot de passe doit contenir au moins 6 caractères")
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role = Role.USER;
 
     public Long getid() {
         return id;
@@ -50,5 +57,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

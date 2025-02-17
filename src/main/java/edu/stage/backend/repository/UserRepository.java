@@ -1,6 +1,6 @@
 package edu.stage.backend.repository;
 
-import edu.stage.backend.User;
+import edu.stage.backend.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
