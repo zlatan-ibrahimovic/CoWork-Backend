@@ -1,5 +1,5 @@
 # Étape 1 : Build l'application
-FROM maven:3.9.0-eclipse-temurin-21 AS build
+FROM maven:3.9.1-openjdk-21-slim AS build
 WORKDIR /app
 COPY pom.xml .
 RUN mvn dependency:go-offline
