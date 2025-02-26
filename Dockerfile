@@ -1,5 +1,6 @@
 # Étape 1 : Build l'application
-FROM maven:3.9.1-openjdk-21-slim AS build
+# FROM docker-dev-virtual.repository.pole-emploi.intra/maven/docker-pe-maven-3.8.6-jdk-17-owasp:1.0.0 AS build
+FROM maven:3.8.5-openjdk-17 AS build
 WORKDIR /app
 COPY pom.xml .
 RUN mvn dependency:go-offline

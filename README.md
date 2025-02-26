@@ -76,6 +76,10 @@ Voici quelques commandes utiles pour travailler avec le projet Maven :
     ```
 Le fichier .jar généré sera disponible dans le dossier target/.
 
+* **Construire image docker :**
+    ```bash
+    docker build . --tag cowork-backend:$(date +%s)
+    ```
 # Structure du projet
 
 Voici un aperçu des dossiers et fichiers principaux du projet Spring Boot :
